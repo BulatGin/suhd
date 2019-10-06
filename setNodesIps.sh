@@ -14,6 +14,7 @@ else
     return
 fi
 
+export NODE0=54.163.120.156
 export NODE1=$IP1
 export NODE2=$IP2
 export NODE3=$IP3
