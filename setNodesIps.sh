@@ -21,5 +21,5 @@ export NODE3=$IP3
 
 if ! grep -q "# AWS nodes ips aliases" ~/.bashrc; then
     echo "# AWS nodes ips aliases" >> ~/.bashrc
-    printf "export NODE1=$IP1\nexport NODE2=$IP2\nexport NODE3=$IP3\n" >> ~/.bashrc
+    printf "export NODE0=$NODE0\nexport NODE1=$IP1\nexport NODE2=$IP2\nexport NODE3=$IP3\n" >> ~/.bashrc
 fi
