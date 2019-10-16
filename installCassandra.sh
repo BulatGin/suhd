@@ -15,8 +15,8 @@ python --version
 
 echo "-----------INSTALL CASSANDRA---------"
 
-if ! ([ -f /etc/apt/sources.list.d/cassandra.sources.list] && grep -Fq "deb http://www.apache.org/dist/cassandra/debian 36x main" /etc/apt/sources.list.d/cassandra.sources.list); then
-    echo "deb http://www.apache.org/dist/cassandra/debian 36x main" | sudo tee -a /etc/apt/sources.list.d/cassandra.sources.list
+if ! ([ -f /etc/apt/sources.list.d/cassandra.sources.list] && grep -Fq "deb http://www.apache.org/dist/cassandra/debian 311x main" /etc/apt/sources.list.d/cassandra.sources.list); then
+    echo "deb http://www.apache.org/dist/cassandra/debian 311x main" | sudo tee /etc/apt/sources.list.d/cassandra.sources.list
 fi
 
 curl https://www.apache.org/dist/cassandra/KEYS | sudo apt-key add -
