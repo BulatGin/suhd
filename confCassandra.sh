@@ -1,15 +1,18 @@
-me=$0
+me=$1
 source ./setNodesIps.sh -l
-printf "cluster_name: 'Test Cluster'\n
-num_tokens: 256\n
+sudo service cassandra stop
+sudo rm -rf /var/lib/cassandra/data/system/*
+printf "cluster_name: 'Test Cluster'
+num_tokens: 256
 seed_provider:
-\t- class_name: org.apache.cassandra.locator.SimpleSeedProvider\n
-\t\t- seeds: $NODE1, $NODE2, $NODE3\n
-listen_address: $me\n
-rpc_address: $me\n
-endpoint_snitch: GossipingPropertyFileSnitch" > /etc/cassandra/cassandra.yaml
+    - class_name: org.apache.cassandra.locator.SimpleSeedProvider
+      parameters:
+          - seeds: $NODE1,$NODE2,$NODE3
+listen_address: $me
+rpc_address: $me
+endpoint_snitch: GossipingPropertyFileSnitch\n" | sudo tee -a /etc/cassandra/cassandra.yaml
 
-printf "dc=ru\nrack=rack0" > /etc/cassandra/cassandra-rackdc.properties
+printf "dc=ru\nrack=rack0\n" | sudo tee -a /etc/cassandra/cassandra-rackdc.properties
 
 sudo rm /etc/cassandra/cassandra-topology.properties
 

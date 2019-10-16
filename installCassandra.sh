@@ -1,5 +1,6 @@
 echo "-------INSTALL JAVA-------"
 
+sudo apt-get purge -y --auto-remove openjdk*
 sudo apt-get install -y openjdk-8-jre-headless
 
 echo "-----JAVA VERSION CHECK------"
@@ -21,7 +22,7 @@ fi
 curl https://www.apache.org/dist/cassandra/KEYS | sudo apt-key add -
 
 sudo apt-get update
-
+sudo apt-get purge -y cassandra
 sudo apt-get install -y cassandra
 
 echo "------TEST RUN------"
