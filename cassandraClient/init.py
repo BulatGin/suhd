@@ -1,6 +1,9 @@
+import random
+
 from cassandra.cluster import Cluster
 from cassandra.cluster import NoHostAvailable
 import psycopg2
+from psycopg2.extras import execute_values
 
 try:
     cluster = Cluster(['172.31.44.69', '172.31.34.223'])
@@ -17,8 +20,6 @@ try:
             vehicle_count smallint,
             pedestrian_count smallint,
             CID int,
-            green_delay smallint,
-            red_delay smallint
             PRIMARY KEY ((RID), CID, create_time)
     )''')
     session.execute('''
@@ -46,6 +47,14 @@ except NoHostAvailable as e:
 conn = psycopg2.connect("user='postgres' password='postgres' host='database-1.crzusti7h5eb.us-east-1.rds.amazonaws.com' dbname='traffic_lights'")
 cur = conn.cursor()
 
+def gen_TL_rows():
+    lst = []
+    for i in range(2500):
+        loc = (random.uniform(100.0, 103.0), random.uniform(100.0, 103.0))
+        lst.append((str(loc), False, random.randint(5, 121), random.randint(5, 121)))
+        lst.append((str(loc), True, random.randint(5, 121), random.randint(5, 121)))
+    return lst
+
 cur.execute('''
     CREATE TABLE IF NOT EXISTS traffic_light (
         TLID serial primary key,
@@ -61,6 +70,8 @@ cur.execute('''
         TLID integer references traffic_light(TLID)
     ) 
 ''')
+execute_values(cur, '''INSERT INTO traffic_light (location, type, green_delay, red_delay) VALUES %s''', gen_TL_rows())
+execute_values(cur, '''INSERT INTO camera (TLID) VALUES %s''', [(i,) for i in range(1, 5001)] + [(i,) for i in range(1, 5001)])
 conn.commit()
 cur.close()
 conn.close()
