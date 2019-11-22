@@ -1,5 +1,6 @@
 import random
 import time
+import datetime
 
 from cassandra.cluster import Cluster
 from threading import Timer
@@ -19,12 +20,13 @@ def insert_records():
     t.setDaemon(True)
     t.start()
     insert = session.prepare('''INSERT INTO traffic_lights.record (cid, create_time, pedestrian_count, vehicle_count)
-    VALUES(?, toTimestamp(now()), ?, ?)''')
+    VALUES(?, ?, ?, ?)''')
     batch = BatchStatement()
+    send_time = datetime.datetime.now().isoformat()
     start = time.time()
     for id in ids_pool:
         try:
-            batch.add(insert, (id, random.randint(0, 100), random.randint(0, 200)))
+            batch.add(insert, (id, send_time, random.randint(0, 100), random.randint(0, 200)))
         except Exception as e:
             print('The Cassandra error: ', e)
     session.execute(batch)
