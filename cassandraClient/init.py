@@ -35,8 +35,6 @@ try:
             location tuple<double, double>,
             vehicle_count_changes frozen<list<smallint>>,
             pedestrian_count_changes frozen<list<smallint>>,
-            green_delay_changes frozen<list<smallint>>,
-            red_delay_changes frozen<list<smallint>>,
             PRIMARY KEY ((ARID), TLID, period)
     )
     ''')
