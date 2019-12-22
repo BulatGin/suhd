@@ -90,11 +90,11 @@ sudo mkdir data
 ```
 sudo vi conf/zoo.cfg
 
-tickTime = 2000
-dataDir = /opt/zookeeper/data
-clientPort = 2181
-initLimit = 20
-syncLimit = 10
+tickTime=2000
+dataDir=/opt/zookeeper/data
+clientPort=2181
+initLimit=20
+syncLimit=10
 ```
 4. Запустить сервер
 ```
