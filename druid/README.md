@@ -80,7 +80,7 @@ druid.indexer.logs.s3Prefix=druid/indexing-logs
 1. Найти файл с нужной версией(лучше предпоследней): `http://apache-mirror.rbc.ru/pub/apache/zookeeper/` и скопировать url к нему
 2. Скачать и установить
 ```
-curl -O http://apache-mirror.rbc.ru/pub/apache/zookeeper/zookeeper-3.5.5/apache-zookeeper-3.5.5.tar.gz
+curl -O http://apache-mirror.rbc.ru/pub/apache/zookeeper/zookeeper-3.5.5/apache-zookeeper-3.5.5-bin.tar.gz
 tar -xzf apache-zookeeper-3.5.5
 sudo cp -r apache-zookeeper-3.5.5/ /opt/zookeeper
 sudo cd /opt/zookeeper
