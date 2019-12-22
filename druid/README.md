@@ -88,7 +88,7 @@ sudo mkdir data
 ```
 3. Создать конфигурационный файл
 ```
-vi conf/zoo.cfg
+sudo vi conf/zoo.cfg
 
 tickTime = 2000
 dataDir = /opt/zookeeper/data
@@ -98,11 +98,12 @@ syncLimit = 10
 ```
 4. Запустить сервер
 ```
-./bin/zkServer.sh start conf/zoo.cfg
+sudo ./bin/zkServer.sh start conf/zoo.cfg
 ```
 5. (*)Проверить, что работает `bin/zkCli.sh`
 6. Меняем настроки в `./conf/druid/cluster/_common/common.runtime.properties` **на всех нодах**
 ```
+# Если подняли на мастер сервере, иначе другой, отдельный ip для zookeeper'а
 druid.zk.service.host=<ip master сервера>:2181
 ```
 
