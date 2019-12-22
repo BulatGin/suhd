@@ -3,7 +3,7 @@
 ## Prerequisites
 0. *Предполгается, что все делается на ubuntu 16.04 LTS*
 1. Необходимы три ноды размера **m5.2xlarge**
-2. На каждую ноду должна быть устанвлена java
+2. На каждую ноду должна быть установлена java
    ```
    sudo apt update
    sudo apt install default-jdk
@@ -51,7 +51,7 @@ druid.metadata.storage.connector.password=diurd
 
 1. Создаем S3 bucket в AWS, надо указать имя корзины, все остальные настройки прокликиваем "далее"
 2. В vocareum жмем "Account details"
-3. Копируем предлагаемое содержание файла в файл `~/.aws/credentials`
+3. Копируем предлагаемое содержание файла в файл `~/.aws/credentials` **на всех нодах**
 4. Меняем настроки в `./conf/druid/cluster/_common/common.runtime.properties` **на всех нодах**
 ```
 # Аналогично дописать в список, а не менять строчку полностью
