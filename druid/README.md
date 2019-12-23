@@ -38,8 +38,8 @@ create user druid with encrypted password 'druid';
 grant all privileges on database druid to druid;
 ALTER DATABASE druid OWNER TO druid;
 ```
-3. Закомментируем строки с derby
-4. Меняем настройки в `./conf/druid/cluster/_common/common.runtime.properties` **на всех нодах**
+3. Меняем настройки в `./conf/druid/cluster/_common/common.runtime.properties` **на всех нодах**
+    Закомментируйте строки с derby
 ```
 # добавить "postgresql-metadata-storage" в существующий список
 druid.extensions.loadList=["postgresql-metadata-storage"]
