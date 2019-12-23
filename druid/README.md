@@ -21,6 +21,10 @@ tar -xzf apache-druid-0.16.1-incubating-bin.tar.gz
 cd apache-druid-0.16.1-incubating-bin.tar.gz
 ```
 
+## Удалить лишние зависимости
+В `./conf/druid/cluster/_common/common.runtime.properties` **на всех нодах**
+Удалить из списка druid.extensions.loadList лишние зависимости например hdfs и kafka
+
 ## Настройка Metadata storage
 Внешняя реляционная бд в которой хранятся метаданные
 
@@ -37,7 +41,7 @@ ALTER DATABASE druid OWNER TO druid;
 3. Закомментируем строки с derby
 4. Меняем настройки в `./conf/druid/cluster/_common/common.runtime.properties` **на всех нодах**
 ```
-# эту строчку не копировать, а добавить "postgresql-metadata-storage" в существующий список
+# добавить "postgresql-metadata-storage" в существующий список
 druid.extensions.loadList=["postgresql-metadata-storage"]
 
 druid.metadata.storage.type=postgresql
@@ -51,10 +55,16 @@ druid.metadata.storage.connector.password=diurd
 
 1. Создаем S3 bucket в AWS, надо указать имя корзины, все остальные настройки прокликиваем "далее"
 2. В vocareum жмем "Account details"
-3. Копируем предлагаемое содержание файла в файл `~/.aws/credentials` **на всех нодах**
+3. Копируем предлагаемое содержание файла в файл `~/.aws/credentials` **на всех нодах**, поменяв имена параметров
+```
+[default]
+aссessKey=...
+secretKey=...
+sessionToken=...
+```
 4. Меняем настроки в `./conf/druid/cluster/_common/common.runtime.properties` **на всех нодах**
 ```
-# Аналогично дописать в список, а не менять строчку полностью
+# Аналогично дописать в список
 druid.extensions.loadList=["druid-s3-extensions"]
 
 # Эти строки надо закомментировать
